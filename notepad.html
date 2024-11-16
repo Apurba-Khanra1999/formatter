@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Notepad</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+  <style>
+    /* Make the buttons float at the bottom right */
+    .floating-buttons {
+      position: fixed;
+      top: 2rem;
+      right: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 min-h-screen flex items-center justify-center p-4">
+  <div class="bg-white shadow-lg rounded-lg w-full max-w-6xl h-[85vh] flex">
+    <!-- Right Panel: Output (Scrollable) -->
+    <div class="w-full p-4">
+      <textarea 
+        id="notepad" 
+        class="w-full h-[78vh] p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+        placeholder="Start typing here..."
+      ></textarea>
+      <p class="flex justify-end text-sm text-gray-400 tracking-wide">content will be auto saved</p>
+    </div>
+  </div>
+
+  <!-- Floating Buttons -->
+  <div class="floating-buttons">
+    <button id="downloadButton" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg w-full">
+        <i class="fa-solid fa-cloud-arrow-down"></i> &nbsp; Download
+    </button>
+    <button id="resetButton" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg w-full">
+        <i class="fa-solid fa-arrows-rotate"></i> &nbsp; Reset 
+    </button>
+  </div>
+
+  <script>
+    const notepad = document.getElementById('notepad');
+    const resetButton = document.getElementById('resetButton');
+    const downloadButton = document.getElementById('downloadButton');
+
+    // Load saved content and font from localStorage
+    notepad.value = localStorage.getItem('notepadContent') || '';
+
+    // Save content to localStorage
+    notepad.addEventListener('input', () => {
+      localStorage.setItem('notepadContent', notepad.value);
+    });
+
+    // Clear content
+    resetButton.addEventListener('click', () => {
+      notepad.value = '';
+      localStorage.removeItem('notepadContent');
+    });
+
+    // Download notes
+    downloadButton.addEventListener('click', () => {
+      const blob = new Blob([notepad.value], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'notes.txt';
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+  </script>
+</body>
+</html>
