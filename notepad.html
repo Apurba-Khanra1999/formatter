@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Advanced Notepad</title>
+  <title>Advanced Notepad with Tabs</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
   <style>
-    /* Make the buttons float at the bottom right */
     .floating-buttons {
       position: fixed;
       top: 2rem;
@@ -18,688 +17,190 @@
     }
   </style>
 </head>
-<body class="">
-    <div class="bg-gray-50 text-gray-800 min-h-screen flex items-center justify-center p-4">
-        <div class="bg-white shadow-lg rounded-lg w-full max-w-6xl h-[85vh] flex">
-            <!-- Right Panel: Output (Scrollable) -->
-            <div class="w-full p-4">
-              <textarea 
-                id="notepad" 
-                class="w-full h-[78vh] p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                placeholder="Start typing here..."
-              ></textarea>
-              <p class="flex justify-end text-sm text-gray-400 tracking-wide">content will be auto saved</p>
-            </div>
-          </div>
-        
-          <!-- Floating Buttons -->
-          <div class="floating-buttons">
-            <button id="downloadButton" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg w-full">
-                <i class="fa-solid fa-cloud-arrow-down"></i> &nbsp; Download
-            </button>
-            <button id="resetButton" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg w-full">
-                <i class="fa-solid fa-arrows-rotate"></i> &nbsp; Reset 
-            </button>
-          </div>
+<body class="bg-gray-50 text-gray-800 min-h-screen flex items-center justify-center p-4">
+  <div class="bg-white shadow-lg rounded-xl w-full max-w-7xl h-[85vh] flex flex-col">
+    <!-- Tabs Header -->
+    <div id="tabs" class="flex border-b border-gray-200">
+      <button id="addTabButton" class="px-4 py-2 text-blue-500 hover:text-blue-600 flex items-center gap-1">
+        <i class="fa-solid fa-plus"></i> Add Tab
+      </button>
     </div>
-    <!-- BELOW HERO SECTION  -->
-    <div class="bg-white py-16">
-        <div class="mx-auto max-w-7xl px-6 lg:px-8">
-          <div class="mx-auto max-w-2xl lg:text-center">
-            <h2 class="text-base/7 font-semibold text-orange-600">Deploy faster</h2>
-            <p class="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl lg:text-balance">Everything you need to deploy your app</p>
-            <p class="mt-6 text-lg/8 text-gray-600">Quis tellus eget adipiscing convallis sit sit eget aliquet quis. Suspendisse eget egestas a elementum pulvinar et feugiat blandit at. In mi viverra elit nunc.</p>
-          </div>
-          <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
-            <dl class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
-              <div class="relative pl-16">
-                <dt class="text-base/7 font-semibold text-gray-900">
-                  <div class="absolute left-0 top-0 flex size-10 items-center justify-center rounded-lg bg-orange-600">
-                    <svg class="size-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0 3 3m-3-3-3 3M6.75 19.5a4.5 4.5 0 0 1-1.41-8.775 5.25 5.25 0 0 1 10.233-2.33 3 3 0 0 1 3.758 3.848A3.752 3.752 0 0 1 18 19.5H6.75Z" />
-                    </svg>
-                  </div>
-                  Push to deploy
-                </dt>
-                <dd class="mt-2 text-base/7 text-gray-600">Morbi viverra dui mi arcu sed. Tellus semper adipiscing suspendisse semper morbi. Odio urna massa nunc massa.</dd>
-              </div>
-              <div class="relative pl-16">
-                <dt class="text-base/7 font-semibold text-gray-900">
-                  <div class="absolute left-0 top-0 flex size-10 items-center justify-center rounded-lg bg-orange-600">
-                    <svg class="size-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
-                    </svg>
-                  </div>
-                  SSL certificates
-                </dt>
-                <dd class="mt-2 text-base/7 text-gray-600">Sit quis amet rutrum tellus ullamcorper ultricies libero dolor eget. Sem sodales gravida quam turpis enim lacus amet.</dd>
-              </div>
-              <div class="relative pl-16">
-                <dt class="text-base/7 font-semibold text-gray-900">
-                  <div class="absolute left-0 top-0 flex size-10 items-center justify-center rounded-lg bg-orange-600">
-                    <svg class="size-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
-                    </svg>
-                  </div>
-                  Simple queues
-                </dt>
-                <dd class="mt-2 text-base/7 text-gray-600">Quisque est vel vulputate cursus. Risus proin diam nunc commodo. Lobortis auctor congue commodo diam neque.</dd>
-              </div>
-              <div class="relative pl-16">
-                <dt class="text-base/7 font-semibold text-gray-900">
-                  <div class="absolute left-0 top-0 flex size-10 items-center justify-center rounded-lg bg-orange-600">
-                    <svg class="size-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M7.864 4.243A7.5 7.5 0 0 1 19.5 10.5c0 2.92-.556 5.709-1.568 8.268M5.742 6.364A7.465 7.465 0 0 0 4.5 10.5a7.464 7.464 0 0 1-1.15 3.993m1.989 3.559A11.209 11.209 0 0 0 8.25 10.5a3.75 3.75 0 1 1 7.5 0c0 .527-.021 1.049-.064 1.565M12 10.5a14.94 14.94 0 0 1-3.6 9.75m6.633-4.596a18.666 18.666 0 0 1-2.485 5.33" />
-                    </svg>
-                  </div>
-                  Advanced security
-                </dt>
-                <dd class="mt-2 text-base/7 text-gray-600">Arcu egestas dolor vel iaculis in ipsum mauris. Tincidunt mattis aliquet hac quis. Id hac maecenas ac donec pharetra eget.</dd>
-              </div>
-            </dl>
-          </div>
-        </div>
-      </div>
-      <!-- TRUSTED BY -->
-       <div class="bg-black">
-        <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-            <div class="mx-auto max-w-3xl text-center">
-              <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl dark:text-white">
-                Trusted by eCommerce Businesses
-              </h2>
-          
-              <p class="mt-4 text-gray-500 sm:text-xl dark:text-gray-400">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione dolores laborum labore
-                provident impedit esse recusandae facere libero harum sequi.
-              </p>
-            </div>
-          
-            <dl class="mt-6 grid grid-cols-1 gap-4 sm:mt-8 sm:grid-cols-2 lg:grid-cols-4">
-              <div class="flex flex-col rounded-lg bg-blue-50 px-4 py-8 text-center dark:bg-blue-700/25">
-                <dt class="order-last text-lg font-medium text-gray-500 dark:text-white/75">Total Sales</dt>
-          
-                <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl dark:text-blue-50">$4.8m</dd>
-              </div>
-          
-              <div class="flex flex-col rounded-lg bg-blue-50 px-4 py-8 text-center dark:bg-blue-700/25">
-                <dt class="order-last text-lg font-medium text-gray-500 dark:text-white/75">
-                  Official Addons
-                </dt>
-          
-                <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl dark:text-blue-50">24</dd>
-              </div>
-          
-              <div class="flex flex-col rounded-lg bg-blue-50 px-4 py-8 text-center dark:bg-blue-700/25">
-                <dt class="order-last text-lg font-medium text-gray-500 dark:text-white/75">Total Addons</dt>
-          
-                <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl dark:text-blue-50">86</dd>
-              </div>
-          
-              <div class="flex flex-col rounded-lg bg-blue-50 px-4 py-8 text-center dark:bg-blue-700/25">
-                <dt class="order-last text-lg font-medium text-gray-500 dark:text-white/75">Downloads</dt>
-          
-                <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl dark:text-blue-50">86k</dd>
-              </div>
-            </dl>
-          </div>
-       </div>
-
-      <!-- TESTIMONIALS  -->
-  <section class="bg-white">
-    <div class="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-      <h2 class="text-center text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-        Read trusted reviews from our customers
-      </h2>
-  
-      <div class="mt-8">
-        <div id="keen-slider" class="keen-slider">
-          <div class="keen-slider__slide opacity-40 transition-opacity duration-500">
-            <blockquote class="rounded-lg bg-gray-50 p-6 shadow-sm sm:p-8">
-              <div class="flex items-center gap-4">
-                <img
-                  alt=""
-                  src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
-                  class="size-14 rounded-full object-cover"
-                />
-  
-                <div>
-                  <div class="flex justify-center gap-0.5 text-green-500">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="size-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                      />
-                    </svg>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="size-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                      />
-                    </svg>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="size-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                      />
-                    </svg>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="size-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                      />
-                    </svg>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="size-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                      />
-                    </svg>
-                  </div>
-  
-                  <p class="mt-0.5 text-lg font-medium text-gray-900">Paul Starr</p>
-                </div>
-              </div>
-  
-              <p class="mt-4 text-gray-700">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa sit rerum incidunt, a
-                consequuntur recusandae ab saepe illo est quia obcaecati neque quibusdam eius
-                accusamus error officiis atque voluptates magnam!
-              </p>
-            </blockquote>
-          </div>
-  
-          <div class="keen-slider__slide opacity-40 transition-opacity duration-500">
-            <blockquote class="rounded-lg bg-gray-50 p-6 shadow-sm sm:p-8">
-              <div class="flex items-center gap-4">
-                <img
-                  alt=""
-                  src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
-                  class="size-14 rounded-full object-cover"
-                />
-  
-                <div>
-                  <div class="flex justify-center gap-0.5 text-green-500">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="size-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                      />
-                    </svg>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="size-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                      />
-                    </svg>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="size-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                      />
-                    </svg>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="size-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                      />
-                    </svg>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="size-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                      />
-                    </svg>
-                  </div>
-  
-                  <p class="mt-0.5 text-lg font-medium text-gray-900">Paul Starr</p>
-                </div>
-              </div>
-  
-              <p class="mt-4 text-gray-700">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa sit rerum incidunt, a
-                consequuntur recusandae ab saepe illo est quia obcaecati neque quibusdam eius
-                accusamus error officiis atque voluptates magnam!
-              </p>
-            </blockquote>
-          </div>
-  
-          <div class="keen-slider__slide opacity-40 transition-opacity duration-500">
-            <blockquote class="rounded-lg bg-gray-50 p-6 shadow-sm sm:p-8">
-              <div class="flex items-center gap-4">
-                <img
-                  alt=""
-                  src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
-                  class="size-14 rounded-full object-cover"
-                />
-  
-                <div>
-                  <div class="flex justify-center gap-0.5 text-green-500">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="size-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                      />
-                    </svg>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="size-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                      />
-                    </svg>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="size-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                      />
-                    </svg>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="size-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                      />
-                    </svg>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="size-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                      />
-                    </svg>
-                  </div>
-  
-                  <p class="mt-0.5 text-lg font-medium text-gray-900">Paul Starr</p>
-                </div>
-              </div>
-  
-              <p class="mt-4 text-gray-700">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa sit rerum incidunt, a
-                consequuntur recusandae ab saepe illo est quia obcaecati neque quibusdam eius
-                accusamus error officiis atque voluptates magnam!
-              </p>
-            </blockquote>
-          </div>
-  
-          <div class="keen-slider__slide opacity-40 transition-opacity duration-500">
-            <blockquote class="rounded-lg bg-gray-50 p-6 shadow-sm sm:p-8">
-              <div class="flex items-center gap-4">
-                <img
-                  alt=""
-                  src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
-                  class="size-14 rounded-full object-cover"
-                />
-  
-                <div>
-                  <div class="flex justify-center gap-0.5 text-green-500">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="size-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                      />
-                    </svg>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="size-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                      />
-                    </svg>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="size-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                      />
-                    </svg>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="size-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                      />
-                    </svg>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="size-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                      />
-                    </svg>
-                  </div>
-  
-                  <p class="mt-0.5 text-lg font-medium text-gray-900">Paul Starr</p>
-                </div>
-              </div>
-  
-              <p class="mt-4 text-gray-700">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa sit rerum incidunt, a
-                consequuntur recusandae ab saepe illo est quia obcaecati neque quibusdam eius
-                accusamus error officiis atque voluptates magnam!
-              </p>
-            </blockquote>
-          </div>
-        </div>
-  
-        <div class="mt-6 flex items-center justify-center gap-4">
-          <button
-            aria-label="Previous slide"
-            id="keen-slider-previous"
-            class="text-gray-600 transition-colors hover:text-gray-900"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="size-5"
-            >
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-            </svg>
-          </button>
-  
-          <p class="w-16 text-center text-sm text-gray-700">
-            <span id="keen-slider-active"></span>
-            /
-            <span id="keen-slider-count"></span>
-          </p>
-  
-          <button
-            aria-label="Next slide"
-            id="keen-slider-next"
-            class="text-gray-600 transition-colors hover:text-gray-900"
-          >
-            <svg
-              class="size-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M9 5l7 7-7 7"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
+    
+    <!-- Editor Panels -->
+    <div id="tabContents" class="flex-1 overflow-hidden rounded-b-xl">
+      <!-- Dynamic content will be injected here -->
     </div>
-  </section>
+  </div>
 
-  <!-- FOOTER -->
-  <footer class="bg-gray-100 dark:bg-black">
-    <div class="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
-      <div class="flex justify-center text-teal-600 dark:text-teal-300">
-        <img src="assets/logo.png" alt="" width="250" height="80">
-      </div>
-  
-      <p class="mx-auto mt-6 max-w-md text-center leading-relaxed text-gray-500 dark:text-gray-400">
-        A platform that streamlines your coding process with tools like CSS and HTML formatters, code beautifiers, and customization options.
-      </p>
-  
-      <ul class="mt-12 flex justify-center gap-10 md:gap-20">
-        <li>
-          <a
-            href="#"
-            rel="noreferrer"
-            target="_blank"
-            class="text-gray-700 transition hover:text-gray-700/75 dark:text-white dark:hover:text-orange-600"
-          >
-            <span class="sr-only">Facebook</span>
-            <svg class="size-10" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                fill-rule="evenodd"
-                d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-                clip-rule="evenodd"
-              />
-            </svg>
-          </a>
-        </li>
-  
-        <li>
-          <a
-            href="#"
-            rel="noreferrer"
-            target="_blank"
-            class="text-gray-700 transition hover:text-gray-700/75 dark:text-white dark:hover:text-orange-600"
-          >
-            <span class="sr-only">Instagram</span>
-            <svg class="size-10" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                fill-rule="evenodd"
-                d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
-                clip-rule="evenodd"
-              />
-            </svg>
-          </a>
-        </li>
-  
-        <li>
-          <a
-            href="#"
-            rel="noreferrer"
-            target="_blank"
-            class="text-gray-700 transition hover:text-gray-700/75 dark:text-white dark:hover:text-orange-600"
-          >
-            <span class="sr-only">Twitter</span>
-            <svg class="size-10" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"
-              />
-            </svg>
-          </a>
-        </li>
-  
-        <li>
-          <a
-            href="#"
-            rel="noreferrer"
-            target="_blank"
-            class="text-gray-700 transition hover:text-orange-600 dark:text-white dark:hover:text-orange-600 ">
-            <span class="sr-only">GitHub</span>
-            <svg class="size-10" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                fill-rule="evenodd"
-                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                clip-rule="evenodd"
-              />
-            </svg>
-          </a>
-        </li>
-        
-        <li>
-          <a
-            href="#"
-            rel="noreferrer"
-            target="_blank"
-            class="text-gray-700 transition hover:text-gray-700/75 dark:text-white dark:hover:text-orange-600"
-          >
-            <span class="sr-only">Dribbble</span>
-            <svg class="size-10" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                fill-rule="evenodd"
-                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z"
-                clip-rule="evenodd"
-              />
-            </svg>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </footer>
-<link href="https://cdn.jsdelivr.net/npm/keen-slider@6.8.6/keen-slider.min.css" rel="stylesheet" />
-
-<script type="module">
-  import KeenSlider from 'https://cdn.jsdelivr.net/npm/keen-slider@6.8.6/+esm'
-
-  const keenSliderActive = document.getElementById('keen-slider-active')
-  const keenSliderCount = document.getElementById('keen-slider-count')
-
-  const keenSlider = new KeenSlider(
-    '#keen-slider',
-    {
-      loop: true,
-      defaultAnimation: {
-        duration: 750,
-      },
-      slides: {
-        origin: 'center',
-        perView: 1,
-        spacing: 16,
-      },
-      breakpoints: {
-        '(min-width: 640px)': {
-          slides: {
-            origin: 'center',
-            perView: 1.5,
-            spacing: 16,
-          },
-        },
-        '(min-width: 768px)': {
-          slides: {
-            origin: 'center',
-            perView: 1.75,
-            spacing: 16,
-          },
-        },
-        '(min-width: 1024px)': {
-          slides: {
-            origin: 'center',
-            perView: 3,
-            spacing: 16,
-          },
-        },
-      },
-      created(slider) {
-        slider.slides[slider.track.details.rel].classList.remove('opacity-40')
-
-        keenSliderActive.innerText = slider.track.details.rel + 1
-        keenSliderCount.innerText = slider.slides.length
-      },
-      slideChanged(slider) {
-        slider.slides.forEach((slide) => slide.classList.add('opacity-40'))
-
-        slider.slides[slider.track.details.rel].classList.remove('opacity-40')
-
-        keenSliderActive.innerText = slider.track.details.rel + 1
-      },
-    },
-    []
-  )
-
-  const keenSliderPrevious = document.getElementById('keen-slider-previous')
-  const keenSliderNext = document.getElementById('keen-slider-next')
-
-  keenSliderPrevious.addEventListener('click', () => keenSlider.prev())
-  keenSliderNext.addEventListener('click', () => keenSlider.next())
-</script>
+  <!-- Floating Buttons -->
+  <div class="floating-buttons">
+    <button id="downloadButton" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg w-full">
+      <i class="fa-solid fa-cloud-arrow-down"></i>
+    </button>
+    <button id="resetButton" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg w-full">
+      <i class="fa-solid fa-arrows-rotate"></i>
+    </button>
+  </div>
 
   <script>
-    const notepad = document.getElementById('notepad');
+    const tabs = document.getElementById('tabs');
+    const tabContents = document.getElementById('tabContents');
+    const addTabButton = document.getElementById('addTabButton');
     const resetButton = document.getElementById('resetButton');
     const downloadButton = document.getElementById('downloadButton');
+    let currentTabId = null;
 
-    // Load saved content and font from localStorage
-    notepad.value = localStorage.getItem('notepadContent') || '';
+    const state = {
+      tabs: [],
+      contents: {},
+      names: {}
+    };
 
-    // Save content to localStorage
-    notepad.addEventListener('input', () => {
-      localStorage.setItem('notepadContent', notepad.value);
-    });
+    function createTab(id) {
+      const tabButton = document.createElement('button');
+      tabButton.id = `tab-${id}`;
+      tabButton.className = 'px-4 py-2 text-gray-500 hover:text-gray-600 border-b-2 flex items-center';
+      tabButton.innerHTML = `
+        <span id="tab-name-${id}">${state.names[id] || `Tab ${id}`}</span>
+        <span class="ml-2 text-blue-500 cursor-pointer" onclick="renameTab('${id}')"><i class="fa-solid fa-pen"></i></span>
+        <span class="ml-2 text-red-500 cursor-pointer" onclick="deleteTab('${id}')"><i class="fa-solid fa-times"></i></span>
+      `;
+      tabButton.onclick = (e) => {
+        if (!e.target.closest('span')?.classList.contains('cursor-pointer')) {
+          switchTab(id);
+        }
+      };
+      tabs.appendChild(tabButton);
+    }
 
-    // Clear content
+    function createTabContent(id) {
+      const textarea = document.createElement('textarea');
+      textarea.id = `content-${id}`;
+      textarea.className = 'w-full h-full p-4 border-0 focus:outline-none';
+      textarea.placeholder = `Start typing in Tab ${id}...`;
+      textarea.style.display = 'none';
+      textarea.addEventListener('input', () => {
+        state.contents[id] = textarea.value;
+        saveState();
+      });
+      tabContents.appendChild(textarea);
+    }
+
+    function switchTab(id) {
+      if (currentTabId !== null) {
+        document.getElementById(`content-${currentTabId}`).style.display = 'none';
+        document.getElementById(`tab-${currentTabId}`).classList.remove('border-blue-500', 'text-blue-500');
+      }
+      currentTabId = id;
+      document.getElementById(`content-${id}`).style.display = 'block';
+      document.getElementById(`tab-${id}`).classList.add('border-blue-500', 'text-blue-500');
+    }
+
+    function deleteTab(id) {
+      if (state.tabs.length === 1) {
+        alert('You must have at least one tab open.');
+        return;
+      }
+      const tabButton = document.getElementById(`tab-${id}`);
+      const tabContent = document.getElementById(`content-${id}`);
+      tabs.removeChild(tabButton);
+      tabContents.removeChild(tabContent);
+      
+      state.tabs = state.tabs.filter(tabId => tabId !== id);
+      delete state.contents[id];
+      delete state.names[id];
+      saveState();
+
+      if (state.tabs.length > 0) {
+        switchTab(state.tabs[0]);
+      }
+    }
+
+    function renameTab(id) {
+      const tabNameSpan = document.getElementById(`tab-name-${id}`);
+      const currentName = tabNameSpan.textContent;
+
+      const inputField = document.createElement('input');
+      inputField.type = 'text';
+      inputField.value = currentName;
+      inputField.className = 'border p-1 text-gray-700 rounded';
+      inputField.onblur = () => saveRenamedTab(id, inputField.value);
+      inputField.onkeydown = (e) => {
+        if (e.key === 'Enter') {
+          saveRenamedTab(id, inputField.value);
+        }
+      };
+
+      tabNameSpan.replaceWith(inputField);
+      inputField.focus();
+    }
+
+    function saveRenamedTab(id, newName) {
+      const inputField = document.querySelector(`#tab-${id} input`);
+      const span = document.createElement('span');
+      span.id = `tab-name-${id}`;
+      span.textContent = newName || `Tab ${id}`;
+      inputField.replaceWith(span);
+      state.names[id] = newName || `Tab ${id}`;
+      saveState();
+    }
+
+    function saveState() {
+      localStorage.setItem('notepadState', JSON.stringify(state));
+    }
+
+    function loadState() {
+      const savedState = JSON.parse(localStorage.getItem('notepadState') || '{}');
+      if (savedState.tabs && savedState.tabs.length) {
+        Object.assign(state, savedState);
+        savedState.tabs.forEach(tabId => {
+          createTab(tabId);
+          createTabContent(tabId);
+          document.getElementById(`content-${tabId}`).value = state.contents[tabId];
+        });
+        switchTab(state.tabs[0]);
+      } else {
+        addNewTab();
+      }
+    }
+
+    function addNewTab() {
+      const newId = Date.now().toString();
+      state.tabs.push(newId);
+      state.contents[newId] = '';
+      state.names[newId] = `Tab ${newId}`;
+      createTab(newId);
+      createTabContent(newId);
+      switchTab(newId);
+      saveState();
+    }
+
+    addTabButton.addEventListener('click', addNewTab);
     resetButton.addEventListener('click', () => {
-      notepad.value = '';
-      localStorage.removeItem('notepadContent');
+      if (currentTabId) {
+        document.getElementById(`content-${currentTabId}`).value = '';
+        state.contents[currentTabId] = '';
+        saveState();
+      }
     });
-
-    // Download notes
     downloadButton.addEventListener('click', () => {
-      const blob = new Blob([notepad.value], { type: 'text/plain' });
+      let allContent = '';
+      state.tabs.forEach(tabId => {
+        const tabName = state.names[tabId];
+        const tabContent = state.contents[tabId];
+        allContent += `### ${tabName} ###\n\n${tabContent}\n\n---\n\n`;
+      });
+
+      const blob = new Blob([allContent], { type: 'text/plain' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'notes.txt';
+      a.download = 'AllTabsContent.txt';
       a.click();
       URL.revokeObjectURL(url);
     });
+
+    window.onload = loadState;
   </script>
 </body>
 </html>
