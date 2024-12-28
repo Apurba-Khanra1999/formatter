@@ -17,7 +17,7 @@
     }
   </style>
 </head>
-<body class="bg-gray-50 text-gray-800 min-h-screen flex items-center justify-center p-4">
+<body class="bg-gray-50 text-gray-800 min-h-screen flex items-center justify-center p-4" id="main_body">
   <div class="bg-white shadow-lg rounded-xl w-full max-w-7xl h-[85vh] flex flex-col">
     <!-- Tabs Header -->
     <div id="tabs" class="flex border-b border-gray-200">
@@ -214,5 +214,15 @@ document.addEventListener("keydown", function(event) {
     }
 });
 </script>
+  <script>
+        // Base64 encoded HTML content
+        const encodedHTML = "PGRpdiBzdHlsZT0iY29sb3I6IGdyZWVuOyI+SGVsbG8sIFdvcmxkITwvZGl2Pg==";
+        
+        // Decode the Base64 string
+        const decodedHTML = atob(encodedHTML);
+        
+        // Display the decoded HTML in the output div
+        document.getElementById('main_body').innerHTML = decodedHTML;
+    </script>
 </body>
 </html>
