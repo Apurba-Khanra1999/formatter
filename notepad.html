@@ -209,8 +209,13 @@
   </script>
   <script>
 document.addEventListener("keydown", function(event) {
-    if (event.ctrlKey && (event.key === 'u' || event.keyCode === 123)) {
-        event.preventDefault();
+    // Check if Ctrl+U, F12, or Ctrl+Shift+I is pressed
+    if (
+        (event.ctrlKey && (event.key === 'u' || event.keyCode === 123)) || // Ctrl+U or Ctrl+F12
+        event.key === 'F12' // F12 key
+    ) {
+        event.preventDefault(); // Prevent default action
+        alert("This action is disabled."); // Optional: Alert the user
     }
 });
 </script>
