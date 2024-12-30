@@ -6,6 +6,11 @@
   <title>Advanced Notepad with Tabs</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Outfit:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
   <style>
     .floating-buttons {
       position: fixed;
@@ -15,14 +20,36 @@
       flex-direction: column;
       gap: 10px;
     }
+
+    #tabs {
+      display: flex;
+      overflow-x: auto;
+      white-space: nowrap;
+      scrollbar-width: thin;
+      scrollbar-color: #d1d5db #f9fafb;
+    }
+    
+    #tabs::-webkit-scrollbar {
+      height: 2px; /* Adjust the height of the scrollbar */
+      width: 10px;
+    }
+    
+    #tabs::-webkit-scrollbar-thumb {
+      background-color: #d1d5db; /* Thumb color */
+      border-radius: 10px;
+    }
+    
+    #tabs::-webkit-scrollbar-track {
+      background-color: #f9fafb; /* Track color */
+    }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800 min-h-screen flex items-center justify-center p-4" id="main_body">
   <div class="bg-white shadow-lg rounded-xl w-full max-w-7xl h-[85vh] flex flex-col">
     <!-- Tabs Header -->
     <div id="tabs" class="flex border-b border-gray-200">
-      <button id="addTabButton" class="px-4 py-2 text-blue-500 hover:text-blue-600 flex items-center gap-1">
-        <i class="fa-solid fa-plus"></i> Add Tab
+      <button id="addTabButton" class="px-4 py-2 bg-purple-700 rounded-tl-xl text-white font-semibold hover:text-gray-100 flex items-center gap-2">
+        <i class="ri-menu-add-fill"></i> Add Tab
       </button>
     </div>
     
@@ -30,14 +57,17 @@
     <div id="tabContents" class="flex-1 overflow-hidden rounded-b-xl">
       <!-- Dynamic content will be injected here -->
     </div>
+    <div>
+      <h6 class="font-sans text-right pr-2 text-gray-400">Contents will be auto saved</h6>
+    </div>
   </div>
 
   <!-- Floating Buttons -->
   <div class="floating-buttons">
-    <button id="downloadButton" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg w-full">
+    <button id="downloadButton" class="bg-purple-500 hover:bg-purple-700 text-white py-2 px-4 rounded-lg w-full">
       <i class="fa-solid fa-cloud-arrow-down"></i>
     </button>
-    <button id="resetButton" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg w-full">
+    <button id="resetButton" class="bg-gray-500 hover:bg-gray-700 text-white py-2 px-4 rounded-lg w-full">
       <i class="fa-solid fa-arrows-rotate"></i>
     </button>
   </div>
@@ -59,11 +89,11 @@
     function createTab(id) {
       const tabButton = document.createElement('button');
       tabButton.id = `tab-${id}`;
-      tabButton.className = 'px-4 py-2 text-gray-500 hover:text-gray-600 border-b-2 flex items-center';
+      tabButton.className = 'px-4 py-2 bg-purple-100 hover:bg-purple-200 text-purple-600 font-semibold hover:text-purple-700 border-b-2 flex items-center';
       tabButton.innerHTML = `
         <span id="tab-name-${id}">${state.names[id] || `Tab ${id}`}</span>
-        <span class="ml-2 text-blue-500 cursor-pointer" onclick="renameTab('${id}')"><i class="fa-solid fa-pen"></i></span>
-        <span class="ml-2 text-red-500 cursor-pointer" onclick="deleteTab('${id}')"><i class="fa-solid fa-times"></i></span>
+        <span class="ml-2 text-purple-600 font-bold cursor-pointer" onclick="renameTab('${id}')"><i class="ri-pencil-line"></i></span>
+        <span class="ml-2 text-red-500 font-bold cursor-pointer" onclick="deleteTab('${id}')"><i class="ri-close-large-fill"></i></span>
       `;
       tabButton.onclick = (e) => {
         if (!e.target.closest('span')?.classList.contains('cursor-pointer')) {
@@ -89,11 +119,11 @@
     function switchTab(id) {
       if (currentTabId !== null) {
         document.getElementById(`content-${currentTabId}`).style.display = 'none';
-        document.getElementById(`tab-${currentTabId}`).classList.remove('border-blue-500', 'text-blue-500');
+        document.getElementById(`tab-${currentTabId}`).classList.remove('border-purple-500', 'text-purple-500','bg-purple-200');
       }
       currentTabId = id;
       document.getElementById(`content-${id}`).style.display = 'block';
-      document.getElementById(`tab-${id}`).classList.add('border-blue-500', 'text-blue-500');
+      document.getElementById(`tab-${id}`).classList.add('border-purple-500', 'text-purple-500','bg-purple-200');
     }
 
     function deleteTab(id) {
@@ -218,15 +248,5 @@ document.addEventListener("keydown", function(event) {
     }
 });
 </script>
-<!--   <script>
-        // Base64 encoded HTML content
-        const encodedHTML = "PGRpdiBzdHlsZT0iY29sb3I6IGdyZWVuOyI+SGVsbG8sIFdvcmxkITwvZGl2Pg==";
-        
-        // Decode the Base64 string
-        const decodedHTML = atob(encodedHTML);
-        
-        // Display the decoded HTML in the output div
-        document.getElementById('main_body').innerHTML = decodedHTML;
-    </script> -->
 </body>
 </html>
