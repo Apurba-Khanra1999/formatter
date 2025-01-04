@@ -102,8 +102,8 @@
       tabButton.draggable = true; // Make the tab draggable
       tabButton.innerHTML = `
         <span id="tab-name-${id}">${state.names[id] || `Tab ${id}`}</span>
-        <span class="ml-2 text-blue-500 cursor-pointer" onclick="renameTab('${id}')"><i class="ri-pencil-line"></i></span>
-        <span class="ml-2 text-red-500 cursor-pointer" onclick="deleteTab('${id}')"><i class="ri-close-line"></i></span>
+        <span class="ml-2 text-blue-500 cursor-pointer" onclick="renameTab('${id}')"><i class="ri-pencil-fill"></i></span>
+        <span class="ml-2 text-red-500 cursor-pointer" onclick="deleteTab('${id}')"><i class="ri-close-large-line"></i></span>
       `;
       tabButton.onclick = (e) => {
         if (!e.target.closest('span')?.classList.contains('cursor-pointer')) {
