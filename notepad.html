@@ -1,85 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Advanced Notepad with Tabs</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css"/>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Notepad with Tabs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css"/>
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Outfit:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <style>
+      .floating-buttons {
+        position: fixed;
+        top: 2rem;
+        right: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+  
+      #tabs {
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+        scrollbar-width: thin;
+        scrollbar-color: #d1d5db #f9fafb;
+      }
+      
+      #tabs::-webkit-scrollbar {
+        height: 2px; /* Adjust the height of the scrollbar */
+        width: 10px;
+      }
+      
+      #tabs::-webkit-scrollbar-thumb {
+        background-color: #d1d5db; /* Thumb color */
+        border-radius: 10px;
+      }
+      
+      #tabs::-webkit-scrollbar-track {
+        background-color: #f9fafb; /* Track color */
+      }
+  
+      #tabs button.border-dashed {
+        border-bottom-style: dashed;
+      }
+      
+      #tabs button.opacity-50 {
+        opacity: 0.5;
+      }
+      
+    </style>
+  </head>
+  <body class="bg-purple-50 text-gray-800 min-h-screen flex items-center justify-center p-4" id="main_body">
+    <div class="bg-white shadow-lg rounded-xl w-full max-w-7xl h-[85vh] flex gap-2">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Outfit:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-  <style>
-    .floating-buttons {
-      position: fixed;
-      top: 2rem;
-      right: 2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+      <!-- Main Content -->
+      <div class="bg-white overflow-hidden rounded-tr-xl w-full flex flex-col">
+        <!-- Tabs Header -->
+        <div id="tabs" class="flex border-b border-gray-200">
+          <button id="addTabButton" class="px-4 py-2 bg-purple-700 rounded-tl-xl text-white font-semibold hover:text-gray-100 flex items-center gap-2">
+            <i class="ri-menu-add-fill"></i> Add Tab
+          </button>
+        </div>
+  
+        <!-- Editor Panels -->
+        <div id="tabContents" class="flex-1 overflow-hidden rounded-b-xl">
+          <!-- Dynamic content will be injected here -->
+        </div>
+        <div>
+          <h6 class="font-sans text-right pr-2 text-gray-400">Contents will be auto saved</h6>
+        </div>
+    </div>
 
-    #tabs {
-      display: flex;
-      overflow-x: auto;
-      white-space: nowrap;
-      scrollbar-width: thin;
-      scrollbar-color: #d1d5db #f9fafb;
-    }
-    
-    #tabs::-webkit-scrollbar {
-      height: 2px; /* Adjust the height of the scrollbar */
-      width: 10px;
-    }
-    
-    #tabs::-webkit-scrollbar-thumb {
-      background-color: #d1d5db; /* Thumb color */
-      border-radius: 10px;
-    }
-    
-    #tabs::-webkit-scrollbar-track {
-      background-color: #f9fafb; /* Track color */
-    }
-
-    #tabs button.border-dashed {
-      border-bottom-style: dashed;
-    }
-    
-    #tabs button.opacity-50 {
-      opacity: 0.5;
-    }
-    
-  </style>
-</head>
-<body class="bg-gray-50 text-gray-800 min-h-screen flex items-center justify-center p-4" id="main_body">
-  <div class="bg-white shadow-lg rounded-xl w-full max-w-7xl h-[85vh] flex flex-col">
-    <!-- Tabs Header -->
-    <div id="tabs" class="flex border-b border-gray-200">
-      <button id="addTabButton" class="px-4 py-2 bg-purple-700 rounded-tl-xl text-white font-semibold hover:text-gray-100 flex items-center gap-2">
-        <i class="ri-menu-add-fill"></i> Add Tab
+      <div class="w-1/4 bg-gray-100 rounded-tr-xl rounded-br-xl flex flex-col p-4">
+        <h3 class="text-lg font-semibold text-gray-700 mb-4">To-Do List</h3>
+        <div class="flex items-center gap-2 mb-4">
+          <input id="todoInput" type="text" placeholder="Add new task..." class="flex-1 px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-purple-300" />
+          <button id="addTodoButton" class="bg-purple-500 text-white px-3 py-2 rounded-lg hover:bg-purple-600">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+        <ul id="todoList" class="flex-1 scrollbar space-y-2 overflow-y-auto pr-2">
+          <!-- Tasks will be dynamically added here -->
+        </ul>
+      </div>
+  
+    </div>
+  
+    <!-- Floating Buttons -->
+    <div class="floating-buttons">
+      <button id="downloadButton" class="bg-purple-500 hover:bg-purple-700 text-white py-2 px-4 rounded-lg w-full">
+        <i class="fa-solid fa-cloud-arrow-down"></i>
+      </button>
+      <button id="resetButton" class="bg-gray-500 hover:bg-gray-700 text-white py-2 px-4 rounded-lg w-full">
+        <i class="fa-solid fa-arrows-rotate"></i>
       </button>
     </div>
-    
-    <!-- Editor Panels -->
-    <div id="tabContents" class="flex-1 overflow-hidden rounded-b-xl">
-      <!-- Dynamic content will be injected here -->
-    </div>
-    <div>
-      <h6 class="font-sans text-right pr-2 text-gray-400">Contents will be auto saved</h6>
-    </div>
-  </div>
-
-  <!-- Floating Buttons -->
-  <div class="floating-buttons">
-    <button id="downloadButton" class="bg-purple-500 hover:bg-purple-700 text-white py-2 px-4 rounded-lg w-full">
-      <i class="fa-solid fa-cloud-arrow-down"></i>
-    </button>
-    <button id="resetButton" class="bg-gray-500 hover:bg-gray-700 text-white py-2 px-4 rounded-lg w-full">
-      <i class="fa-solid fa-arrows-rotate"></i>
-    </button>
-  </div>
 
   <script>
     const tabs = document.getElementById('tabs');
@@ -87,13 +105,122 @@
     const addTabButton = document.getElementById('addTabButton');
     const resetButton = document.getElementById('resetButton');
     const downloadButton = document.getElementById('downloadButton');
+    const todoInput = document.getElementById('todoInput');
+    const addTodoButton = document.getElementById('addTodoButton');
+    const todoList = document.getElementById('todoList');
     let currentTabId = null;
+    let dragSource = null;
 
     const state = {
       tabs: [],
       contents: {},
-      names: {}
+      names: {},
+      todos: []
     };
+
+    // To-Do List Functions
+    function addTodo() {
+      const task = todoInput.value.trim();
+      if (!task) return;
+      const id = Date.now();
+      state.todos.push({ id, task, completed: false });
+      saveState();
+      renderTodos();
+      todoInput.value = '';
+    }
+
+    function toggleTodoCompletion(id) {
+      const todo = state.todos.find(todo => todo.id === id);
+      if (todo) {
+        todo.completed = !todo.completed;
+        saveState();
+        renderTodos();
+      }
+    }
+
+    function deleteTodo(id) {
+      state.todos = state.todos.filter(todo => todo.id !== id);
+      saveState();
+      renderTodos();
+    }
+
+    function renderTodos() {
+      todoList.innerHTML = '';
+      state.todos.forEach(todo => {
+        const li = document.createElement('li');
+        li.className = "flex items-center justify-between py-2 px-3 bg-purple-300 rounded-xl shadow cursor-pointer";
+        li.draggable = true; // Make each task draggable
+    
+        li.innerHTML = `
+          <div class="flex items-center">
+            <input type="checkbox" class="mr-2" ${todo.completed ? 'checked' : ''} onchange="toggleTodoCompletion(${todo.id})" />
+            <span class="${todo.completed ? 'line-through text-gray-500' : ''}">${todo.task}</span>
+          </div>
+          <button onclick="deleteTodo(${todo.id})" class="text-red-500 hover:text-red-700">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        `;
+    
+        // Event listeners for drag and drop
+        li.addEventListener('dragstart', handleDragStart);
+        li.addEventListener('dragover', handleDragOver);
+        li.addEventListener('dragenter', handleDragEnter);
+        li.addEventListener('dragleave', handleDragLeave);
+        li.addEventListener('drop', handleDrop);
+        li.addEventListener('dragend', handleDragEnd);
+    
+        todoList.appendChild(li);
+      });
+    }
+    
+    // Dragging handlers
+    function handleDragStart(e) {
+      dragSource = e.target;
+      e.target.classList.add('opacity-50');
+    }
+    
+    function handleDragOver(e) {
+      e.preventDefault();
+      e.target.classList.add('border-dashed', 'border-2');
+    }
+    
+    function handleDragEnter(e) {
+      e.preventDefault();
+    }
+    
+    function handleDragLeave(e) {
+      e.target.classList.remove('border-dashed', 'border-2');
+    }
+    
+    function handleDrop(e) {
+      e.preventDefault();
+      if (dragSource !== e.target) {
+        const draggedId = dragSource.querySelector('span').innerText;
+        const droppedId = e.target.querySelector('span').innerText;
+    
+        // Swap tasks in state.todos array
+        const draggedTaskIndex = state.todos.findIndex(todo => todo.task === draggedId);
+        const droppedTaskIndex = state.todos.findIndex(todo => todo.task === droppedId);
+    
+        if (draggedTaskIndex !== -1 && droppedTaskIndex !== -1) {
+          [state.todos[draggedTaskIndex], state.todos[droppedTaskIndex]] = [state.todos[droppedTaskIndex], state.todos[draggedTaskIndex]];
+          saveState();
+          renderTodos(); // Re-render list after swap
+        }
+      }
+    
+      e.target.classList.remove('border-dashed', 'border-2');
+    }
+    
+    function handleDragEnd(e) {
+      e.target.classList.remove('opacity-50');
+      dragSource = null;
+    }
+
+    addTodoButton.addEventListener('click', addTodo);
+    todoInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') addTodo();
+    });
 
     function createTab(id) {
       const tabButton = document.createElement('button');
@@ -200,6 +327,7 @@
           createTabContent(tabId);
           document.getElementById(`content-${tabId}`).value = state.contents[tabId];
         });
+        renderTodos();
         switchTab(state.tabs[0]);
         makeTabsDraggable(); // Ensure drag-and-drop is enabled
       } else {
