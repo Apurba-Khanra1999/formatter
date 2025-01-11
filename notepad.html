@@ -3,29 +3,46 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Notepad with Tabs</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css"/>
-  
+    <link rel="stylesheet" href="notepadcss.css">
+    <!-- <script src="main.js" defer type="module"></script> -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Outfit:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/keen-slider@6.8.6/keen-slider.min.css" rel="stylesheet" />
 
     <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
     <link rel="manifest" href="favicon_io/site.webmanifest">
 
+    <title>Best & Free Digital Note Taking App | Personal use | All Devices</title>
+
+    <meta name="keywords" content="note-taking app for windows, best note-taking app for students, note-taking app for android, best note-taking app with stylus, best note-taking app with stylus android, best note-taking app for students free, note-taking apps free, note-taking app for windows with stylus, evernote, microsoft onenote, note taking app for students, note taking app for pc, free note taking app, best note taking app, note taking website, note-taking app, note-taking app for windows, notes, note taking free, digital note taking app" />
+
+    <meta name="description" content="Capture notes, share them with others, and access them from your computer, phone, or tablet. Integrate Memory with your daily life and streamline your workflow. Sign up today!" />
+
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="Article" />
+    <meta property="og:title" content="Best & Free Digital Note Taking App | Personal use | All Devices" />
+    <meta property="og:site_name" content="Best & Free Digital Note Taking App | Personal use | All Devices" />
+    <meta property="og:description" content="Capture notes, share them with others, and access them from your computer, phone, or tablet. Integrate Memory with your daily life and streamline your workflow. Sign up today!" />
+    <meta property="og:image" content="favicon_io/favicon-32x32.png" />
+
     <style>
       .floating-buttons {
         position: fixed;
-        top: 2rem;
+        top: 8rem;
         right: 2rem;
         display: flex;
         flex-direction: column;
         gap: 10px;
       }
+
+      
   
       #tabs {
         display: flex;
@@ -59,42 +76,417 @@
       
     </style>
   </head>
-  <body class="bg-purple-50 text-gray-800 min-h-screen flex items-center justify-center p-4" id="main_body">
-    <div class="bg-white shadow-lg rounded-xl w-full max-w-7xl h-[85vh] flex gap-2">
-
-      <!-- Main Content -->
-      <div class="bg-white overflow-hidden rounded-tr-xl w-full flex flex-col">
-        <!-- Tabs Header -->
-        <div id="tabs" class="flex border-b border-gray-200">
-          <button id="addTabButton" class="px-4 py-2 bg-purple-700 rounded-tl-xl text-white font-semibold hover:text-gray-100 flex items-center gap-2">
-            <i class="ri-menu-add-fill"></i> Add Tab
-          </button>
-        </div>
-  
-        <!-- Editor Panels -->
-        <div id="tabContents" class="flex-1 overflow-hidden rounded-b-xl">
-          <!-- Dynamic content will be injected here -->
-        </div>
-        <div>
-          <h6 class="font-sans text-right pr-2 text-gray-400">Contents will be auto saved</h6>
-        </div>
-    </div>
-
-      <div class="w-1/4 bg-gray-100 rounded-tr-xl rounded-br-xl flex flex-col p-4">
-        <h3 class="text-xl font-bold text-purple-700 mb-4">Sticky Notes</h3>
-        <div class="flex items-center gap-2 mb-4">
-          <input id="todoInput" type="text" placeholder="Add new task..." class="flex-1 px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-purple-300" />
-          <button id="addTodoButton" class="bg-purple-500 text-white px-3 py-2 rounded-lg hover:bg-purple-600">
-            <i class="ri-add-large-line"></i>
-          </button>
-        </div>
-        <ul id="todoList" class="flex-1 scrollbar space-y-2 overflow-y-auto pr-2">
-          <!-- Tasks will be dynamically added here -->
-        </ul>
+  <body class="" id="main_body">
+    
+    <div class="flex items-center justify-between px-8 pt-4 shadow-2xl">
+      <!-- Logo on the left -->
+      <div>
+        <img src="assets/logo-memory.png" alt="Logo" class="h-12">
       </div>
-  
+
+      <div class="tab-container">
+        <input type="radio" name="tab" id="tab1" class="tab tab--1" onclick="window.location.href='#playground'"/>
+        <label class="tab_label" for="tab1"  onclick="window.location.href='#playground'">Playground</label>
+      
+        <input type="radio" name="tab" id="tab2" class="tab tab--2" onclick="window.location.href='#testimonials'" />
+        <label class="tab_label" for="tab2" onclick="window.location.href='#testimonials'">Testimonials</label>
+      
+        <input type="radio" name="tab" id="tab3" class="tab tab--3" onclick="window.location.href='#contacts'"/>
+        <label class="tab_label" for="tab3" onclick="window.location.href='#contacts'">Contact</label>
+      
+        <div class="indicator"></div>
+      </div>
+
+      <!-- Contact Button on the right -->
+      <!-- <div class="flex gap-1">
+        <button class="relative border hover:border-purple-600 duration-500 group cursor-pointer text-purple-50  overflow-hidden h-12 w-40 rounded-md bg-purple-800 p-2 flex justify-center items-center font-extrabold" id="google-login-btn">
+          <div class="absolute z-10 w-48 h-48 rounded-full group-hover:scale-150 transition-all  duration-500 ease-in-out bg-purple-900 delay-150 group-hover:delay-75"></div>
+          <div class="absolute z-10 w-40 h-40 rounded-full group-hover:scale-150 transition-all  duration-500 ease-in-out bg-purple-800 delay-150 group-hover:delay-100"></div>
+          <div class="absolute z-10 w-32 h-32 rounded-full group-hover:scale-150 transition-all  duration-500 ease-in-out bg-purple-700 delay-150 group-hover:delay-150"></div>
+          <div class="absolute z-10 w-24 h-24 rounded-full group-hover:scale-150 transition-all  duration-500 ease-in-out bg-purple-600 delay-150 group-hover:delay-200"></div>
+          <div class="absolute z-10 w-16 h-16 rounded-full group-hover:scale-150 transition-all  duration-500 ease-in-out bg-purple-500 delay-150 group-hover:delay-300"></div>
+          <p class="z-10">Join Us</p>
+        </button>
+      </div> -->
+      <div id="login-container">
+        <!-- Google Login Button -->
+        <button
+          class="relative border hover:border-purple-600 duration-500 group cursor-pointer text-purple-50  overflow-hidden h-12 w-40 rounded-md bg-purple-800 p-2 flex justify-center items-center font-extrabold"
+          id="google-login-btn"
+        >
+          <div class="absolute z-10 w-48 h-48 rounded-full group-hover:scale-150 transition-all  duration-500 ease-in-out bg-purple-900 delay-150 group-hover:delay-75"></div>
+          <div class="absolute z-10 w-40 h-40 rounded-full group-hover:scale-150 transition-all  duration-500 ease-in-out bg-purple-800 delay-150 group-hover:delay-100"></div>
+          <div class="absolute z-10 w-32 h-32 rounded-full group-hover:scale-150 transition-all  duration-500 ease-in-out bg-purple-700 delay-150 group-hover:delay-150"></div>
+          <div class="absolute z-10 w-24 h-24 rounded-full group-hover:scale-150 transition-all  duration-500 ease-in-out bg-purple-600 delay-150 group-hover:delay-200"></div>
+          <div class="absolute z-10 w-16 h-16 rounded-full group-hover:scale-150 transition-all  duration-500 ease-in-out bg-purple-500 delay-150 group-hover:delay-300"></div>
+          <p class="z-10">Join Us</p>
+        </button>
+      </div>
+      
+      <div id="profile-container" class="hidden">
+        <img id="profile" class="w-12 h-12 rounded-full shadow-xl cursor-pointer" src="" alt="Profile" title="Profile Image"/>
+      </div>
+      
+      <!-- Modal -->
+      <div id="profile-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-6 shadow-lg w-80 relative">
+          <button
+            id="modal-close"
+            class="absolute top-2 right-2 text-2xl text-gray-600 hover:text-gray-800">
+            &times;
+          </button>
+          <div class="text-center ">
+            <img id="profile-modal-img" class="w-20 h-20 rounded-full shadow-2xl mx-auto mb-4" src="" alt="Profile" />
+            <h3 id="modal-username" class="text-lg font-semibold"></h3>
+            <p id="modal-useremail" class="text-sm text-gray-600"></p>
+          </div>
+          <button
+            id="logout-btn"
+            class="mt-4 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded w-full">
+            <i class="ri-shut-down-line"></i> Logout
+          </button>
+        </div>
+      </div>
+      
     </div>
-  
+
+    
+    <div class="bg-white text-gray-800 min-h-screen flex items-center justify-center p-4" id="playground">
+      <div class="bg-white border-2 border-black shadow-2xl rounded-2xl w-full max-w-7xl h-[85vh] flex gap-2">
+        <!-- Main Content -->
+        <div class="bg-white overflow-hidden rounded-2xl w-full flex flex-col">
+          <!-- Tabs Header -->
+          <div id="tabs" class="flex border-b border-gray-200">
+            <button id="addTabButton" class="px-4 py-2 bg-purple-700 rounded-tl-xl text-white font-semibold hover:text-gray-100 flex items-center gap-2">
+              <i class="ri-menu-add-fill"></i> Add Tab
+            </button>
+          </div>
+    
+          <!-- Editor Panels -->
+          <div id="tabContents" class="flex-1 overflow-hidden rounded-b-2xl">
+            <!-- Dynamic content will be injected here -->
+          </div>
+          <div>
+            <h6 class="font-sans text-right pr-2 text-gray-400">Contents will be auto saved</h6>
+          </div>
+        </div>
+
+      <!-- Sticky Notes Section  -->
+        <div class="w-1/4 bg-gray-100 rounded-tr-2xl rounded-br-2xl flex flex-col p-4">
+          <h3 class="text-xl font-bold text-purple-700 mb-4">Tasks to complete</h3>
+          <div class="flex items-center gap-2 mb-4">
+            <input id="todoInput" type="text" placeholder="Add new task..." class="flex-1 px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-purple-300" />
+            <button id="addTodoButton" class="bg-purple-500 text-white px-3 py-2 rounded-lg hover:bg-purple-600">
+              <i class="ri-add-large-line"></i>
+            </button>
+          </div>
+          <ul id="todoList" class="flex-1 scrollbar space-y-2 overflow-y-auto pr-2">
+            <!-- Tasks will be dynamically added here -->
+          </ul>
+        </div>
+    
+      </div>
+    </div>
+
+    <!-- HEADING - we stand for -->
+      <div class="heading-loader pt-20">
+        <p class="font-bold text-3xl">We stand for </p>
+        <div class="heading-words text-4xl">
+          <span class="heading-word">PRODUCTIVITY</span>
+          <span class="heading-word">USER FRIENDLY</span>
+          <span class="heading-word">PERSONALIZED</span>
+          <span class="heading-word">CREATIVITY</span>
+          <span class="heading-word">TECHNOLOGY</span>
+          <span class="heading-word">REUSABILITY</span>
+        </div>
+      </div>
+
+    <div id="productivity">
+          <!-- 3 cards sections  -->
+        <div class="flex justify-between gap-10 px-24 pt-16 pb-10" >
+          <div class="card">
+            <div class="content">
+              <div class="name">Effortless Note-Taking</div>
+              <div class="handle">Productivity</div>
+              <div class="title">
+                Quickly write and organize your ideas with an easy-to-use interface and powerful search options.
+              </div>
+            </div>
+            <div class="dots orange-dots"></div>
+            <div class="dots pink-dots"></div>
+          </div>
+          <div class="card">
+            <div class="content">
+              <div class="name">Smart To-Do Lists</div>
+              <div class="handle">Utility</div>
+              <div class="title">
+                Create, prioritize, and track your tasks with reminders to stay on top of your day.
+              </div>
+            </div>
+            <div class="dots orange-dots"></div>
+            <div class="dots pink-dots"></div>
+          </div>
+          <div class="card">
+            <div class="content">
+              <div class="name">Easy Sharing & Collaboration</div>
+              <div class="handle">User Friendly</div>
+              <div class="title">
+                Share notes and tasks with others and work together seamlessly in real time.
+              </div>
+            </div>
+            <div class="dots orange-dots"></div>
+            <div class="dots pink-dots"></div>
+          </div>
+        </div>
+
+        <!-- 3 cards sections  -->
+        <div class="flex justify-between gap-10 px-24 pb-20">
+          <div class="card">
+            <div class="content">
+              <div class="name">Secure Cloud Sync</div>
+              <div class="handle">Technology</div>
+              <div class="title">
+                Access your notes and lists anytime, anywhere, with safe and reliable cloud storage.
+              </div>
+            </div>
+            <div class="dots orange-dots"></div>
+            <div class="dots pink-dots"></div>
+          </div>
+          <div class="card">
+            <div class="content">
+              <div class="name">Personalized Experience</div>
+              <div class="handle">Creative</div>
+              <div class="title">
+                Choose themes, layouts, and widgets to make the app look and feel just the way you like.
+              </div>
+            </div>
+            <div class="dots orange-dots"></div>
+            <div class="dots pink-dots"></div>
+          </div>
+          <div class="card">
+            <div class="content">
+              <div class="name">All-in-One Productivity Tools</div>
+              <div class="handle">Personalized</div>
+              <div class="title">
+                Get extras like habit trackers, calendars, and progress insights to achieve more every day.
+              </div>
+            </div>
+            <div class="dots orange-dots"></div>
+            <div class="dots pink-dots"></div>
+          </div>
+        </div>
+    </div>
+    
+
+    
+    <!-- Testimonials -->
+    <section class="bg-white" id="testimonials">
+      <div class="mx-auto max-w-screen-xl px-4 pb-20 ">
+        <div class="heading-loader pt-20">
+          <p class="font-bold text-3xl">Users appreciates our </p>
+          <div class="heading-words text-4xl">
+            <span class="heading-word">HARDWORD</span>
+            <span class="heading-word">DEDICATION</span>
+            <span class="heading-word">CREATIVITY</span>
+            <span class="heading-word">SUPPORT</span>
+            <span class="heading-word">FLEXIBILITY</span>
+          </div>
+        </div>
+    
+        <div class="mt-8">
+          <div id="keen-slider" class="keen-slider">
+            <div class="keen-slider__slide opacity-40 transition-opacity duration-500">
+              <blockquote class="rounded-lg bg-gray-50 p-6 shadow-sm sm:p-8">
+                <div class="flex items-center gap-4">
+                  <img
+                    alt=""
+                    src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
+                    class="size-14 rounded-full object-cover"
+                  />
+    
+                  <div>
+                    <div class="flex justify-center gap-0.5 text-purple-600">
+                      <i class="ri-star-fill"></i>
+                      <i class="ri-star-fill"></i>
+                      <i class="ri-star-fill"></i>
+                      <i class="ri-star-fill"></i>
+                      <i class="ri-star-fill"></i>
+                    </div>
+    
+                    <p class="mt-0.5 text-lg font-medium text-gray-900">Sam Sinha</p>
+                  </div>
+                </div>
+    
+                <p class="mt-4 text-gray-700">
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa sit rerum incidunt, a
+                  consequuntur recusandae ab saepe illo est quia obcaecati neque quibusdam eius
+                  accusamus error officiis atque voluptates magnam!
+                </p>
+              </blockquote>
+            </div>
+    
+            <div class="keen-slider__slide opacity-40 transition-opacity duration-500">
+              <blockquote class="rounded-lg bg-gray-50 p-6 shadow-sm sm:p-8">
+                <div class="flex items-center gap-4">
+                  <img
+                    alt=""
+                    src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
+                    class="size-14 rounded-full object-cover"
+                  />
+    
+                  <div>
+                    <div class="flex justify-center gap-0.5 text-purple-500">
+                      <i class="ri-star-fill"></i>
+                      <i class="ri-star-fill"></i>
+                      <i class="ri-star-fill"></i>
+                      <i class="ri-star-fill"></i>
+                      <i class="ri-star-fill"></i>
+                    </div>
+    
+                    <p class="mt-0.5 text-lg font-medium text-gray-900">Paul Starr</p>
+                  </div>
+                </div>
+    
+                <p class="mt-4 text-gray-700">
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa sit rerum incidunt, a
+                  consequuntur recusandae ab saepe illo est quia obcaecati neque quibusdam eius
+                  accusamus error officiis atque voluptates magnam!
+                </p>
+              </blockquote>
+            </div>
+    
+            <div class="keen-slider__slide opacity-40 transition-opacity duration-500">
+              <blockquote class="rounded-lg bg-gray-50 p-6 shadow-sm sm:p-8">
+                <div class="flex items-center gap-4">
+                  <img
+                    alt=""
+                    src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
+                    class="size-14 rounded-full object-cover"
+                  />
+    
+                  <div>
+                    <div class="flex justify-center gap-0.5 text-purple-500">
+                      <i class="ri-star-fill"></i>
+                      <i class="ri-star-fill"></i>
+                      <i class="ri-star-fill"></i>
+                      <i class="ri-star-fill"></i>
+                      <i class="ri-star-fill"></i>
+                    </div>
+    
+                    <p class="mt-0.5 text-lg font-medium text-gray-900">Paul Starr</p>
+                  </div>
+                </div>
+    
+                <p class="mt-4 text-gray-700">
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa sit rerum incidunt, a
+                  consequuntur recusandae ab saepe illo est quia obcaecati neque quibusdam eius
+                  accusamus error officiis atque voluptates magnam!
+                </p>
+              </blockquote>
+            </div>
+    
+            <div class="keen-slider__slide opacity-40 transition-opacity duration-500">
+              <blockquote class="rounded-lg bg-gray-50 p-6 shadow-sm sm:p-8">
+                <div class="flex items-center gap-4">
+                  <img
+                    alt=""
+                    src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
+                    class="size-14 rounded-full object-cover"
+                  />
+    
+                  <div>
+                    <div class="flex justify-center gap-0.5 text-purple-500">
+                      <i class="ri-star-fill"></i>
+                      <i class="ri-star-fill"></i>
+                      <i class="ri-star-fill"></i>
+                      <i class="ri-star-fill"></i>
+                      <i class="ri-star-fill"></i>
+                    </div>
+    
+                    <p class="mt-0.5 text-lg font-medium text-gray-900">Paul Starr</p>
+                  </div>
+                </div>
+    
+                <p class="mt-4 text-gray-700">
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa sit rerum incidunt, a
+                  consequuntur recusandae ab saepe illo est quia obcaecati neque quibusdam eius
+                  accusamus error officiis atque voluptates magnam!
+                </p>
+              </blockquote>
+            </div>
+          </div>
+    
+          <div class="mt-6 flex items-center justify-center gap-4">
+            <button
+              aria-label="Previous slide"
+              id="keen-slider-previous"
+              class="text-gray-600 transition-colors hover:text-gray-900">
+              <i class="ri-arrow-left-line"></i>
+            </button>
+    
+            <p class="w-16 text-center text-sm text-gray-700">
+              <span id="keen-slider-active"></span>
+              /
+              <span id="keen-slider-count"></span>
+            </p>
+    
+            <button
+              aria-label="Next slide"
+              id="keen-slider-next"
+              class="text-gray-600 transition-colors hover:text-gray-900">
+              <i class="ri-arrow-right-line"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Contact Us section  -->
+    <div class="flex justify-between gap-10 px-24 pt-28 pb-20 bg-[#e8e8e8]" id="contacts">
+
+
+
+      <div class="container">
+        <div class="card1">
+            <a class="singup">Let's Get Connected</a>
+            <div class="inputBox1">
+                <input type="text" required="required">
+                <span class="user">Email</span>
+            </div>
+
+            <div class="inputBox">
+                <input type="text" required="required">
+                <span>Username</span>
+            </div>
+
+            <div class="inputBox">
+                <input type="password" required="required">
+                <span>Password</span>
+            </div>
+
+            <button class="enter">Enter</button>
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- FOOTER  -->
+    <footer class="bg-gray-50">
+      <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
+        <div class="sm:flex sm:items-center sm:justify-between">
+          <div class="flex justify-center text-teal-600 sm:justify-start">
+            <img src="assets/logo-memory.png" alt="memory-logo" title="memory-logo" width="130">
+          </div>
+          <p class="mt-4 text-center text-sm text-gray-500 lg:mt-0 lg:text-right">
+            Crafted with 💖 by <span class="font-bold text-purple-600 text-lg">Apurba Khanra</span>
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    
     <!-- Floating Buttons -->
     <div class="floating-buttons">
       <button id="downloadButton" class="bg-purple-500 hover:bg-purple-700 text-white py-2 px-4 rounded-lg w-full">
@@ -298,7 +690,7 @@
       const inputField = document.createElement('input');
       inputField.type = 'text';
       inputField.value = currentName;
-      inputField.className = 'border p-1 text-gray-700 rounded';
+      inputField.className = 'border p-1 text-gray-700 rounded-2xl';
       inputField.onblur = () => saveRenamedTab(id, inputField.value);
       inputField.onkeydown = (e) => {
         if (e.key === 'Enter') {
@@ -385,7 +777,7 @@
       e.preventDefault();
     });
   </script>
-  <script>
+  <!-- <script>
     document.addEventListener("keydown", function(event) {
     // Check if Ctrl+U, F12, or Ctrl+Shift+I is pressed
     if (
@@ -395,7 +787,7 @@
         event.preventDefault(); // Prevent default action
     }
 });
-  </script>
+  </script> -->
   <script>
     function makeTabsDraggable() {
       const tabsContainer = document.getElementById('tabs');
@@ -451,6 +843,71 @@
       tabElement.setAttribute('draggable', 'true');
     }
     
+  </script>
+
+  <script type="module">
+    import KeenSlider from 'https://cdn.jsdelivr.net/npm/keen-slider@6.8.6/+esm'
+  
+    const keenSliderActive = document.getElementById('keen-slider-active')
+    const keenSliderCount = document.getElementById('keen-slider-count')
+  
+    const keenSlider = new KeenSlider(
+      '#keen-slider',
+      {
+        loop: true,
+        defaultAnimation: {
+          duration: 750,
+        },
+        slides: {
+          origin: 'center',
+          perView: 1,
+          spacing: 16,
+        },
+        breakpoints: {
+          '(min-width: 640px)': {
+            slides: {
+              origin: 'center',
+              perView: 1.5,
+              spacing: 16,
+            },
+          },
+          '(min-width: 768px)': {
+            slides: {
+              origin: 'center',
+              perView: 1.75,
+              spacing: 16,
+            },
+          },
+          '(min-width: 1024px)': {
+            slides: {
+              origin: 'center',
+              perView: 3,
+              spacing: 16,
+            },
+          },
+        },
+        created(slider) {
+          slider.slides[slider.track.details.rel].classList.remove('opacity-40')
+  
+          keenSliderActive.innerText = slider.track.details.rel + 1
+          keenSliderCount.innerText = slider.slides.length
+        },
+        slideChanged(slider) {
+          slider.slides.forEach((slide) => slide.classList.add('opacity-40'))
+  
+          slider.slides[slider.track.details.rel].classList.remove('opacity-40')
+  
+          keenSliderActive.innerText = slider.track.details.rel + 1
+        },
+      },
+      []
+    )
+  
+    const keenSliderPrevious = document.getElementById('keen-slider-previous')
+    const keenSliderNext = document.getElementById('keen-slider-next')
+  
+    keenSliderPrevious.addEventListener('click', () => keenSlider.prev())
+    keenSliderNext.addEventListener('click', () => keenSlider.next())
   </script>
 
 
